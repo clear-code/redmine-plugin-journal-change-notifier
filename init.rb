@@ -53,7 +53,7 @@ class JournalChangeDiffer
   end
 
   def diff
-    from, to, = @journal.notes
+    from, to, = @journal.notes_change
     unified_diff(from, to)
   end
 
