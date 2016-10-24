@@ -59,8 +59,8 @@ class JournalChangeDiffer
 
   private
   def unified_diff(content_from, content_to)
-    to_lines = content_to.text.to_s.lines.collect(&:chomp)
-    from_lines = content_from.text.to_s.lines.collect(&:chomp)
+    to_lines = content_to.lines.collect(&:chomp)
+    from_lines = content_from.lines.collect(&:chomp)
     diffs = ::Diff::LCS.diff(from_lines, to_lines)
 
     unified_diff = ""
