@@ -49,7 +49,7 @@ end
 
 class JournalChangeDiffer
   def initialize(journal)
-    @journal = jounral
+    @journal = journal
   end
 
   def diff
