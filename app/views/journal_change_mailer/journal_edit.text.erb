@@ -4,6 +4,9 @@
 <%= string %>
 <% end -%>
 
-<%= JournalChangeDiffer.new(@journal).diff %>
+============================================================
+<%= JournalChangeDiffer.new(@journal).diff.html_safe %>
+============================================================
+
 ----------------------------------------
 <%= render :partial => 'mailer/issue', :formats => [:text], :locals => { :issue => @issue, :users => @users, :issue_url => @issue_url } %>
