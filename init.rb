@@ -12,19 +12,19 @@ require "diff/lcs/hunk"
 
 class JournalChangeMailer < Mailer
   class << self
-    def deliver_journal_edit(journal)
+    def deliver_journal_edit(changer, journal)
       issue = journal.journalized.reload
       to = journal.notified_users
       cc = journal.notified_watchers
       journal.each_notification(to + cc) do |users|
         issue.each_notification(users) do |users2|
-          journal_edit(journal, to & users2, cc & users2).deliver
+          journal_edit(changer, journal, to & users2, cc & users2).deliver
         end
       end
     end
   end
 
-  def journal_edit(journal, to_users, cc_users)
+  def journal_edit(changer, journal, to_users, cc_users)
     issue = journal.journalized
     redmine_headers 'Project' => issue.project.identifier,
                     'Issue-Id' => issue.id,
@@ -32,7 +32,7 @@ class JournalChangeMailer < Mailer
     redmine_headers 'Issue-Assignee' => issue.assigned_to.login if issue.assigned_to
     message_id journal
     references issue
-    @author = journal.user
+    @changer = changer
     s = "[#{issue.project.name} - #{issue.tracker.name} ##{issue.id}] "
     s << "(#{issue.status.name}) " if journal.new_value_for('status_id')
     s << issue.subject
@@ -97,6 +97,6 @@ end
 class JournalDiffNotifyListener < Redmine::Hook::Listener
   def controller_journals_edit_post(context)
     journal = context[:journal]
-    JournalChangeMailer.deliver_journal_edit(journal)
+    JournalChangeMailer.deliver_journal_edit(User.current, journal)
   end
 end
