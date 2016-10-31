@@ -1,9 +1,5 @@
 <%= "(#{l(:field_private_notes)}) " if @journal.private_notes? -%><%= l(:text_issue_updated, :id => "##{@issue.id}", :author => @changer) %>
 
-<% details_to_strings(@journal_details, true).each do |string| -%>
-<%= string %>
-<% end -%>
-
 ============================================================
 <%= JournalChangeDiffer.new(@journal).diff.html_safe %>
 ============================================================

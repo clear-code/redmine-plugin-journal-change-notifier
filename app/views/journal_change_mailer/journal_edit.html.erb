@@ -3,12 +3,6 @@
 <% end %>
 <%= l(:text_issue_updated, :id => "##{@issue.id}", :author => h(@changer)) %>
 
-<ul>
-<% details_to_strings(@journal_details, false, :only_path => false).each do |string| %>
-  <li><%= string %></li>
-<% end %>
-</ul>
-
 <hr />
 <pre><%= JournalChangeDiffer.new(@journal).diff %></pre>
 <hr />
