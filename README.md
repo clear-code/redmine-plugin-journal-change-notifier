@@ -12,6 +12,8 @@ change by e-mail.
 % bundle install
 ```
 
+And then restart your Redmine.
+
 ## License
 
 GPL 2 or later. See LICENSE for details.
