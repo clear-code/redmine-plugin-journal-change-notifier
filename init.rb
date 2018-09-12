@@ -97,6 +97,7 @@ end
 class JournalDiffNotifyListener < Redmine::Hook::Listener
   def controller_journals_edit_post(context)
     journal = context[:journal]
+    return until journal.notes_previously_changed?
     JournalChangeMailer.deliver_journal_edit(User.current, journal)
   end
 end
