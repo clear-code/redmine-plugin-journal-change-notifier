@@ -22,5 +22,5 @@ version = $1
 desc "Tag #{version}"
 task :tag do
   sh("git", "tag", "-a", version, "-m", "Release #{version}!!!")
-  sh("git", "push", "--tags"
+  sh("git", "push", "--tags")
 end
