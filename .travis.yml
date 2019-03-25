@@ -1,0 +1,47 @@
+dist: xenial
+
+before_install:
+  - cd ..
+  - git clone
+      --depth 1
+      --branch ${REDMINE_VERSION}-stable
+      https://github.com/redmine/redmine.git
+  - cd redmine/plugins
+  - ln -s ../../redmine-plugin-journal-change-notifier journal_change_notifier
+  - cd ../
+  - |
+    cat <<EOF > config/database.yml
+    development:
+      adapter: sqlite3
+      database: /dev/shm/development.sqlite3
+    test:
+      adapter: sqlite3
+      database: /dev/shm/test.sqlite3
+    EOF
+  - unset BUNDLE_GEMFILE
+
+matrix:
+  include:
+    - name: "Redmine 3.4"
+      env:
+        - REDMINE_VERSION=3.4
+      install:
+        - gem install bundler -v "1.17.3"
+        - bundle _1.17.3_ install
+        - bin/rake db:create
+        - bin/rake generate_secret_token
+        - bin/rake db:migrate
+        - bin/rake redmine:load_default_data REDMINE_LANG=en
+      script:
+        - RAILS_ENV=test bin/rake redmine:plugins:test
+    - name: "Redmine 4.0"
+      env:
+        - REDMINE_VERSION=4.0
+      install:
+        - bundle install
+        - bin/rails db:create
+        - bin/rails generate_secret_token
+        - bin/rails db:migrate
+        - bin/rails redmine:load_default_data REDMINE_LANG=en
+      script:
+        - RAILS_ENV=test bin/rails redmine:plugins:test

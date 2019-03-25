@@ -5,4 +5,11 @@
 ============================================================
 
 ----------------------------------------
-<%= render :partial => 'mailer/issue', :formats => [:text], :locals => { :issue => @issue, :users => @users, :issue_url => @issue_url } %>
+<%= render :partial => 'mailer/issue',
+           :formats => [:text],
+           :locals => {
+              :issue => @issue,
+              :user => @user, # For Redmine 4 or later
+              :users => @users, # For Redmine 3 or ealier
+              :issue_url => @issue_url
+           } %>
