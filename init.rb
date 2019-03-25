@@ -2,7 +2,7 @@ Redmine::Plugin.register :journal_change_notifier do
   name "Journal Change Notifier plugin"
   author "Kouhei Sutou"
   description "Notify journal change by e-mail"
-  version "1.0.0"
+  version "1.0.1"
   url "https://github.com/clear-code/redmine-plugin-journal-change-notifier"
   author_url "https://github.com/kou/"
 end
