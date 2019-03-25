@@ -18,6 +18,7 @@ before_install:
       adapter: sqlite3
       database: /dev/shm/test.sqlite3
     EOF
+  - cat config/database.yml
   - unset BUNDLE_GEMFILE
 
 matrix:
