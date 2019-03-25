@@ -9,16 +9,8 @@ before_install:
   - cd redmine/plugins
   - ln -s ../../redmine-plugin-journal-change-notifier journal_change_notifier
   - cd ../
-  - |
-    cat <<EOF > config/database.yml
-    development:
-      adapter: sqlite3
-      database: /dev/shm/development.sqlite3
-    test:
-      adapter: sqlite3
-      database: /dev/shm/test.sqlite3
-    EOF
-  - cat config/database.yml
+  - cp plugins/journal_change_notifier/config/database.yml
+       config/database.yml
   - unset BUNDLE_GEMFILE
 
 matrix:

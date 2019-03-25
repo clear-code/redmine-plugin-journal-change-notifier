@@ -1,0 +1,6 @@
+development:
+  adapter: sqlite3
+  database: /dev/shm/development.sqlite3
+test:
+  adapter: sqlite3
+  database: /dev/shm/test.sqlite3
