@@ -9,7 +9,7 @@ before_install:
   - cd redmine/plugins
   - ln -s ../../redmine-plugin-journal-change-notifier journal_change_notifier
   - cd ../
-  - cp plugins/journal_change_notifier/config/database.yml
+  - cp plugins/journal_change_notifier/travis/config/database.yml
        config/database.yml
   - unset BUNDLE_GEMFILE
 
