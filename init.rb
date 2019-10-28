@@ -103,10 +103,6 @@ class JournalChangeMailer < Mailer
                          :action => 'show',
                          :id => issue,
                          :anchor => "change-#{journal.id}")
-    pp [:xxx,
-        action_name,
-        method(:action_name).source_location,
-        lookup_context]
     mail(:to => to_users.map(&:mail),
          :cc => cc_users.map(&:mail),
          :subject => s)
