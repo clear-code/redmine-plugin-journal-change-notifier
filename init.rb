@@ -150,8 +150,10 @@ class JournalChangeDiffer
       end
     end
 
-    unified_diff << old_hunk.diff(format)
-    unified_diff << "\n"
+    if old_hunk
+      unified_diff << old_hunk.diff(format)
+      unified_diff << "\n"
+    end
     unified_diff
   end
 end
